@@ -17,7 +17,8 @@ services:
     - 8000:8000
     volumes:
     - .:/usr/src/app
-    command: su -m project_user -c 'python manage.py runserver 0.0.0.0:8000'
+    - ~/.aws/:/root/.aws
+    command: python manage.py runserver 0.0.0.0:8000
     restart: always
 
 # volumes:
