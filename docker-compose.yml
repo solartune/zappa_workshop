@@ -1,18 +1,9 @@
 version: '2'
 
 services:
-  # postgres:
-  #   image: postgres:10-alpine
-  #   ports:
-  #     - "5432:5432"
-  #   environment:
-  #     - POSTGRES_DB=data
-
   app:
     build:
       context: .
-#    depends_on:
-#    - postgres
     ports:
     - 8000:8000
     volumes:
@@ -20,6 +11,3 @@ services:
     - ~/.aws/:/root/.aws
     command: python manage.py runserver 0.0.0.0:8000
     restart: always
-
-# volumes:
-#   pgdata:
