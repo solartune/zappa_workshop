@@ -5,4 +5,6 @@ build:
 	docker-compose build
 
 cmd:
-	docker-compose exec app $(CMD)
+	docker exec -ti zappa_workshop_app_1 $(CMD)
+
+

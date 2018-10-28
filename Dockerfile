@@ -1,8 +1,9 @@
-FROM python:3.6-alpine3.8
+FROM lambci/lambda:build-python3.6
 
-RUN apk add --update \
-    postgresql-dev gcc python3-dev musl-dev linux-headers git libxml2-dev \
-    && rm -rf /var/cache/apk/*
+RUN echo 'export PS1="\[\e[36m\]zappashell>\[\e[m\] "' >> /root/.bashrc
+
+# alias zappashell='docker run -ti -e AWS_PROFILE=$AWS_PROFILE -v $(pwd):/var/task -v ~/.aws/:/root/.aws  --rm lambci/lambda:build-python3.6 bash'
+# alias zappashell >> ~/.bash_profile
 
 WORKDIR /usr/src/app
 COPY requirements.txt /usr/src/app/
