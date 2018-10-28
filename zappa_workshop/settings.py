@@ -23,10 +23,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'm!g_i%^_uej*mm^a1loigbmgvwsyunrqsz20ihsft)i@lv(i=w'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True if os.getenv('DEBUG') == 'True' else False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
+ENV = os.getenv('ENV')
 
 # Application definition
 
@@ -37,7 +38,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'rest_framework',
+    'zappa_django_utils'
 ]
+
+if ENV == 'books':
+    INSTALLED_APPS.append('applications.books')
+elif ENV == 'compute_engine':
+    INSTALLED_APPS.append('applications.compute_engine')
+elif ENV == 'front':
+    INSTALLED_APPS.append('applications.front')
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

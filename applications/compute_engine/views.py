@@ -1,3 +1,10 @@
-from django.shortcuts import render
+from rest_framework import viewsets, mixins
 
-# Create your views here.
+from .models import ComputedBookPrice
+from .serializers import ComputedBookPriceSerializer
+
+
+class ComputedBookPriceViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+
+    queryset = ComputedBookPrice.objects.all()
+    serializer_class = ComputedBookPriceSerializer

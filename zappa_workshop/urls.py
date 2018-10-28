@@ -14,8 +14,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
+
+if settings.ENV == 'books':
+    urlpatterns.append(path('', include('books.urls')))
+elif settings.ENV == 'compute_engine':
+    urlpatterns.append(path('', include('compute_engine.urls')))
+elif settings.ENV == 'front':
+    urlpatterns.append(path('', include('front.urls')))
+
+
