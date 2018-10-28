@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
-    'zappa_django_utils'
+    'zappa_django_utils',
 ]
 
 if ENV == 'books':
@@ -49,6 +49,13 @@ elif ENV == 'compute_engine':
     INSTALLED_APPS.append('applications.compute_engine')
 elif ENV == 'front':
     INSTALLED_APPS.append('applications.front')
+else:
+    INSTALLED_APPS.extend([
+        'applications.books',
+        'applications.compute_engine',
+        'applications.front',
+    ])
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

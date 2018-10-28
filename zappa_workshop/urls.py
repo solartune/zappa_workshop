@@ -27,5 +27,10 @@ elif settings.ENV == 'compute_engine':
     urlpatterns.append(path('', include('compute_engine.urls')))
 elif settings.ENV == 'front':
     urlpatterns.append(path('', include('front.urls')))
-
+else:
+    urlpatterns.extend([
+        path('', include('books.urls')),
+        path('', include('books.compute_engine')),
+        path('', include('books.front')),
+    ])
 
