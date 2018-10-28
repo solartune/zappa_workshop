@@ -1,0 +1,4 @@
+Django==2.1.2
+djangorestframework==3.9.0
+zappa==0.47.0
+uWSGI==2.0.17.1
