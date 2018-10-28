@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'zappa_django_utils',
+    'django_s3_storage',
 ]
 
 if ENVIRONMENT == 'books':
@@ -59,6 +60,17 @@ else:
 
 BOOKS_URL = os.getenv('BOOKS_URL')
 COMPUTE_ENGINE_URL = os.getenv('COMPUTE_ENGINE_URL')
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'PAGE_SIZE': 10,
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'TEST_REQUEST_DEFAULT_FORMAT': 'json'
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -169,3 +181,14 @@ LOGGING = {
         },
     }
 }
+
+BUCKET_NAME = os.getenv('BUCKET_NAME')
+
+STATICFILES_STORAGE = "django_s3_storage.storage.StaticS3Storage"
+AWS_S3_BUCKET_NAME_STATIC = BUCKET_NAME
+
+# These next two lines will serve the static files directly
+# from the s3 bucket
+AWS_S3_CUSTOM_DOMAIN = f'{BUCKET_NAME}.s3.amazonaws.com'
+STATIC_URL = f"https://{BUCKET_NAME}/"
+
