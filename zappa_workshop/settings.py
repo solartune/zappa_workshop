@@ -23,8 +23,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'm!g_i%^_uej*mm^a1loigbmgvwsyunrqsz20ihsft)i@lv(i=w'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True if os.getenv('DEBUG') == 'True' else False
-DEBUG = True
+# Normally it should be vice-versa
+DEBUG = False if os.getenv('DEBUG') == 'False' else True
 
 ALLOWED_HOSTS = ['*']
 
@@ -57,6 +57,8 @@ else:
         'applications.front',
     ])
 
+BOOKS_URL = os.getenv('BOOKS_URL')
+COMPUTE_ENGINE_URL = os.getenv('COMPUTE_ENGINE_URL')
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

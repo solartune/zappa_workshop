@@ -8,7 +8,7 @@ from .models import ComputedBookPrice
 
 @task
 def get_data():
-    url = f'http://{settings.AGGREGATOR_URL}/api/books'
+    url = f'http://{settings.BOOKS_URL}/api/books'
     response = requests.get(url)
     data = response.json().get('data')
     for item in data:
