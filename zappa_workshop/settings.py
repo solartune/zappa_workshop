@@ -23,11 +23,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'm!g_i%^_uej*mm^a1loigbmgvwsyunrqsz20ihsft)i@lv(i=w'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True if os.getenv('DEBUG') == 'True' else False
+# DEBUG = True if os.getenv('DEBUG') == 'True' else False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-ENV = os.getenv('ENV')
+ENVIRONMENT = os.getenv('ENVIRONMENT', '')
 
 # Application definition
 
@@ -43,11 +44,11 @@ INSTALLED_APPS = [
     'zappa_django_utils',
 ]
 
-if ENV == 'books':
+if ENVIRONMENT == 'books':
     INSTALLED_APPS.append('applications.books')
-elif ENV == 'compute_engine':
+elif ENVIRONMENT == 'compute_engine':
     INSTALLED_APPS.append('applications.compute_engine')
-elif ENV == 'front':
+elif ENVIRONMENT == 'front':
     INSTALLED_APPS.append('applications.front')
 else:
     INSTALLED_APPS.extend([
@@ -136,3 +137,33 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, '../static_root')
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+            'datefmt': "%d/%b/%Y %H:%M:%S"
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        }
+    },
+    'loggers': {
+        'waiting': {
+            'handlers': ['console'],
+            'propagate': True,
+            'level': 'INFO',
+        },
+    }
+}

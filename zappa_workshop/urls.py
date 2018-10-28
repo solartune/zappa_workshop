@@ -21,16 +21,16 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 ]
 
-if settings.ENV == 'books':
-    urlpatterns.append(path('', include('books.urls')))
-elif settings.ENV == 'compute_engine':
-    urlpatterns.append(path('', include('compute_engine.urls')))
-elif settings.ENV == 'front':
-    urlpatterns.append(path('', include('front.urls')))
+if settings.ENVIRONMENT == 'books':
+    urlpatterns.append(path('', include('applications.books.urls')))
+elif settings.ENVIRONMENT == 'compute_engine':
+    urlpatterns.append(path('', include('applications.compute_engine.urls')))
+elif settings.ENVIRONMENT == 'front':
+    urlpatterns.append(path('', include('applications.front.urls')))
 else:
     urlpatterns.extend([
-        path('', include('books.urls')),
-        path('', include('books.compute_engine')),
-        path('', include('books.front')),
+        path('', include('applications.books.urls')),
+        path('', include('applications.compute_engine.urls')),
+        path('', include('applications.front.urls')),
     ])
 

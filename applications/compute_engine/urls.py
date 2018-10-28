@@ -8,9 +8,9 @@ from .views import ComputedBookPriceViewSet
 router = DefaultRouter()
 
 router.register(
-    r'books/computed-prices',
+    r'computed-prices',
     ComputedBookPriceViewSet,
-    base_name='computed_book_prices'
+    base_name='computed_book_price'
 )
 
 
