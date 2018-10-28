@@ -1,0 +1,6 @@
+.idea/
+*.pyc
+.DS_Store
+*.pid
+media_root
+static_root
